@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper创建，并设置名字，方便核心配置文件（mybatis）找到，名字就是该文件的全路径 -->
+<mapper namespace="com.mytest.shrio.mapper.ShrioMapper">
+
+    <resultMap id="adminMap" type="Admin">
+        <id column="admin_id" property="adminId"/>
+        <result column="uname" property="uname"/>
+        <result column="pwd" property="pwd"/>
+        <result column="name" property="name"/>
+        <result column="role_id" property="roleId"/>
+        <result column="salt" property="salt"/>
+        <result column="hashIterator" property="hashIterator"/>
+    </resultMap>
+
+    <select id="selectAdminAll" parameterType="Admin" resultMap="adminMap">
+        select * from admins where uname = #{uname} and pwd = #{pwd}
+    </select>
+</mapper>

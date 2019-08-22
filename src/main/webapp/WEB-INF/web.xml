@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>J2eeTest</display-name>
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring-*</param-value>
+  </context-param>
+
+  <!-- 配置context 加载的监听器 （也就是ContextLoaderListener上下文加载监听器）  -->
+  <!-- 加载spring 的容器 -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>utf-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <servlet>
+    <servlet-name>springMVC</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+  <!--SpringMVC配置文件的名字  <servlet-name>-servlet.xml
+      默认位置:src / resources
+      如果放在了 src/resources(maven)
+              contextConfigLocation:classpath:文件名即可!
+              Web-INF.xml
+              contextConfigLocation:/WEB-INF.xml
+  -->
+
+  <init-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:springmvc.xml</param-value>
+  </init-param>
+
+  <load-on-startup>1</load-on-startup>
+  </servlet>
+  <!-- 访问DispatcherServlet对应的路径 -->
+  <servlet-mapping>
+    <servlet-name>springMVC</servlet-name>
+    <url-pattern>/</url-pattern> <!--/不过滤jsp防止死循环-->
+  </servlet-mapping>
+
+</web-app>
